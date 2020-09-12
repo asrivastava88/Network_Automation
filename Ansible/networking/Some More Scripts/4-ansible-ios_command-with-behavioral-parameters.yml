@@ -1,0 +1,25 @@
+---
+- name: Running show commands
+  hosts: routers
+  gather_facts: false
+  connection: network_cli
+  become: true ## Ansible Directives
+  become_method: enable ## Ansible Directives
+
+  vars:
+    ansible_user: avinash ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
+    ansible_ssh_pass: cisco ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
+    ansible_become_pass: cisco ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
+    ansible_network_os: ios ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
+
+  tasks:
+    - name: Run multiple commands
+      ios_command:
+        commands:
+          - show runn
+          - show ip protocol
+          - ping 4.2.2.2 rep 10
+      register: output
+
+    - name: Print collected output
+      debug: var=output.stdout_lines

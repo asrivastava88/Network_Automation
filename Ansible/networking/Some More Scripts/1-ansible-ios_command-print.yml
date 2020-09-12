@@ -1,0 +1,19 @@
+---
+- name: Collect Running Configuration
+  hosts: routers
+  connection: network_cli
+  gather_facts: false # Ansible will not check for facts while connecting to routers
+
+  tasks:
+    - name: BGP neighbor
+      ios_command:
+        commands: ## RAW is a module that pass on the string in same way its written to the device. Multiple commands can be pushed at once
+          - show ip bgp neighbors
+          - show version
+      register: output ## Collects the output in variable "output" as dictionary
+
+    - name: Print the output
+      debug: var=output ## Prints the content of the variable "output"
+
+    - name: Print the filtered output
+      debug: var=output.stdout_lines ## Prints the filterd output from the dictionary data

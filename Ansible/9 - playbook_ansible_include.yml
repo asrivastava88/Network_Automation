@@ -1,0 +1,7 @@
+---
+- include: /root/ansible/update_systems.yml ## [DEPRECATION WARNING]: 'include' for playbook includes. You should use 'import_playbook' instead.
+
+- hosts: hosts
+  become: yes
+  tasks:
+      - include: /root/ansible/install_httpd.yml

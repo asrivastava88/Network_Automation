@@ -1,0 +1,9 @@
+<html>
+<center>
+    <h1> This computer's hostname is {{ansible_hostname}} </h1>
+    <h3> It is running the {{ansible_os_family}} family of operating system.</h3>
+    <small> This file is version {{file_version}}</small>
+    {# This will not end up in the final output fie on the remote server. #}
+</center>
+
+</html>

@@ -1,0 +1,6 @@
+---
+- name: Start Debian Service
+  service: name=apache2 enabled=yes state=started
+
+- name: Start CentOS Service
+  service: name=httpd enabled=yes state=started

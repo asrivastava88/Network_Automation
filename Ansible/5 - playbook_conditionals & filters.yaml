@@ -1,0 +1,13 @@
+---
+- hosts: hosts
+  become: yes
+
+  tasks:
+      - name: install apache2
+        apt: name=apache2 state=latest
+        ignore_errors: yes
+        register: results
+
+      - name: install httpd
+        yum: name=httpd state=latest
+        when: results == FAILED! # "pipe symbol" describes the conditions to meet to run the command

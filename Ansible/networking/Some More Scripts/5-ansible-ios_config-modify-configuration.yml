@@ -1,0 +1,18 @@
+---
+- name: Configure Cisco Routers
+  gather_facts: false
+  hosts: routers
+  connection: network_cli
+
+  tasks:
+    - name: Configure name Server
+      ios_config:
+        save_when: modified
+        lines:
+          - ip name-server 4.2.2.2 8.8.8.8
+          - interface Gi2
+          - ip addre 10.9.0.1 255.255.255.0
+      register: output
+
+    - name: Print the output
+      debug: var=output

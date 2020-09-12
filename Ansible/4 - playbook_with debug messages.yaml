@@ -1,0 +1,18 @@
+---
+- hosts: hosts
+  vars:
+      - var_1: "Variable-1"
+      - var_2: "Variable-2"
+      - var_3: "Variable-3"
+
+  tasks:
+      - name: Save Results
+        command: echo -e "{{ var_1 }}\n{{ var_2 }}\n{{var_3}}" # "-e" understands "\n" as a new line in the string
+        register: result
+
+      - name: Show results
+        debug: msg="{{result}}"
+
+      - name: Show filtered results
+        debug: msg="{{result.stdout_lines}}" # results can be filtered out from the variable
+

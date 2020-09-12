@@ -1,0 +1,10 @@
+---
+- name: Collect backup from the routers
+  gather_facts: false
+  hosts: routers
+  connection: network_cli
+
+  tasks:
+    - name: Collecting backup from routers
+      ios_config:
+        backup: yes

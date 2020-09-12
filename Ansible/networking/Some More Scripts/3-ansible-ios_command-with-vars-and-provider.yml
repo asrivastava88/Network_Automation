@@ -1,0 +1,35 @@
+---
+- name: Running show commands
+  hosts: routers
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    login:
+      username: avinash
+      password: cisco
+      auth_pass: cisco
+      authorize: true
+
+  tasks:
+    - name: Run priviledged commands
+      ios_command:
+        provider: "{{login}}"
+        commands:
+          - show running
+          - show ip bgp summ
+          - show ip inter bri
+          - ping 4.2.2.2
+      register: output
+
+    - name: Save the output in file
+      debug: var=output.stdout_lines
+
+    - name: Copy the content to a file
+      copy:
+        content:
+          - "{{output.stdout_lines[0]}}"
+          - "{{output.stdout_lines[1]}}"
+          - "{{output.stdout_lines[2]}}"
+          - "{{output.stdout_lines[3]}}"
+        dest: "/root/ansible/network/test_dir/{{inventory_hostname}}.txt"

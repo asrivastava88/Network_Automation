@@ -1,0 +1,2 @@
+export ANSIBLE_NET_USERNAME=developer
+export ANSIBLE_NET_PASSWORD=C1sco12345

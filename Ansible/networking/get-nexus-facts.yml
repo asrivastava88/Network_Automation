@@ -1,0 +1,15 @@
+---
+- name: Get Facts
+  hosts: hosts
+  connection: local
+  tasks:
+    - name: Get Network devices' Facts
+      nxos_facts:
+        host: "{{inventory_hostname}}"
+        transport: nxapi
+        use_ssl: yes
+        validate_certs: no
+      register: nxos_data
+
+    - name: Print name to Console
+      debug: "msg={{nxos_data}}"

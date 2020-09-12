@@ -1,0 +1,20 @@
+---
+- name: Running show commands on Cisco IOS
+  hosts: routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Run multiple commands
+      ios_command:
+        commands:
+          - show version | in uptime
+          - show ip route
+      register: output
+
+    - name: Save the output to a file
+      copy:
+        content:
+          - "{{output.stdout[0]}}"
+          - "{{output.stdout[1]}}"
+        dest: "/root/ansible/network/test_dir/{{inventory_hostname}}.txt"

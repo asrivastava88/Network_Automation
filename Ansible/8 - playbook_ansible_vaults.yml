@@ -1,0 +1,9 @@
+---
+- hosts: hosts
+  become: yes
+  vars:
+      - ansible_sudo_pass: C1sc0*()
+
+  tasks:
+      - name: Install httpd
+        yum: name=httpd state=latest

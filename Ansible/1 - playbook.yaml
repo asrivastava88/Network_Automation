@@ -1,0 +1,9 @@
+---
+- hosts: hosts
+  become: true # elevates the credential to root before running the task
+  tasks:
+    - name: doa a uname
+      shell: uname -a > resuts.txt
+
+    - name: do whoami
+      shell: whoami >> resuts.txt
