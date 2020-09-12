@@ -1,6 +1,2 @@
-avinash
-kab se
-tum ho
-srivastava
-jane nahi
-denge tujhe
+
+Hellow World!
