@@ -1,0 +1,13 @@
+# Define Ansible Connection Settings
+ansible_connection: network_cli
+# Define type of the OS remote device is running with
+ansible_network_os: ios
+# Define Username & Password
+ansible_user: "{{uname}}"
+ansible_password: "{{passwd}}"
+ansible_ssh_pass: "{{passwd}}"
+ansible_port: 22
+# Allow to go into "Enable" Mode (Priviledge Escalation).
+ansible_become: yes
+ansible_become_method: enable
+ansible_become_pass: "{{enable_pass}}"

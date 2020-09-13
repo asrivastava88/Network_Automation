@@ -1,10 +1,11 @@
 ---
 - hosts: routers
-  name: Configure Router with SNMP configuration
+  name: Backup all ROUTERS
   gather_facts: false
-  connection: network_cli
-  become: true ## Ansible Directives
-  become_method: enable ## Ansible Directives
+
+  #####################################################################################
+  ###### Behavioral Inventory Parameters are stored at "group_vars\routers.yml" #######
+  #####################################################################################
 
   vars_prompt:
     - name: uname
@@ -19,13 +20,14 @@
       private: yes
       unsafe: yes
 
-  vars:
-    ansible_user: "{{uname}}"
-    ansible_ssh_pass: "{{passwd}}"
-    ansible_become_pass: "{{enable_pass}}" ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
-    ansible_network_os: ios ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
-
   tasks:
     - name: Collecting backup from routers
       ios_config:
         backup: yes
+      register: output
+
+    - name: Here is the Configuration Backup Path!
+      shell: echo {{item.changed}} >> backup_status.csv
+      debug:
+        msg: "{{output.backup_path}}"
+      with_items: {{item.change}} + {{item.failed}}
