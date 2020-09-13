@@ -1,0 +1,31 @@
+---
+- hosts: routers
+  name: Configure Router with SNMP configuration
+  gather_facts: false
+  connection: network_cli
+  become: true ## Ansible Directives
+  become_method: enable ## Ansible Directives
+
+  vars_prompt:
+    - name: uname
+      prompt: "Enter Your Username: " # Promp the message while asking for user's input
+      private: no # Make the text visible to users
+    - name: passwd
+      prompt: "Enter Your Password: "
+      private: yes # Make the text invisible to users
+      unsafe: yes # Allows special characters input by user. Its required especially in passwords.
+    - name: enable_pass
+      prompt: "Enter 'enable' Password: "
+      private: yes
+      unsafe: yes
+
+  vars:
+    ansible_user: "{{uname}}"
+    ansible_ssh_pass: "{{passwd}}"
+    ansible_become_pass: "{{enable_pass}}" ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
+    ansible_network_os: ios ## Behavioral Inventory Parameter and is predefined. This has to be compulsory avaiable in order for the script to run.
+
+  tasks:
+    - name: Collecting backup from routers
+      ios_config:
+        backup: yes
