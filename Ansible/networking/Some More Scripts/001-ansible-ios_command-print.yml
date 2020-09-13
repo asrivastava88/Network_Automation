@@ -1,12 +1,11 @@
 ---
-- include: get_uname_passwd.yml
-
 - name: Collect Running Configuration
   hosts: routers
+  connection: network_cli
   gather_facts: false # Ansible will not check for facts while connecting to routers
 
   tasks:
-    - name: Show BGP Neighbor and Hardware Version
+    - name: BGP neighbor
       ios_command:
         commands: ## RAW is a module that pass on the string in same way its written to the device. Multiple commands can be pushed at once
           - show ip bgp neighbors
