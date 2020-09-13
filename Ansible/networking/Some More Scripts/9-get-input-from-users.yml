@@ -1,0 +1,13 @@
+---
+- name: Get input from users
+  hosts: routers
+  vars_prompt:
+    - name: uname
+      prompt: "Enter your Username: "
+      private: no
+    - name: passwd
+      prompt: "Enter your password: "
+
+  tasks:
+    debug:
+      msg: "Logging in as {{uname}}"
