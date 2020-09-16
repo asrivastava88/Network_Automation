@@ -3,7 +3,22 @@
   gather_facts: false
   hosts: routers
   connection: network_cli
+  #####################################################################################
+  ###### Behavioral Inventory Parameters are stored at "group_vars\routers.yml" #######
+  #####################################################################################
 
+  vars_prompt:
+    - name: uname
+      prompt: "Enter Your Username" # Promp the message while asking for user's input
+      private: no # Make the text visible to users
+    - name: passwd
+      prompt: "Enter Your Password"
+      private: yes # Make the text invisible to users
+      unsafe: yes # Allows special characters input by user. Its required especially in passwords.
+    - name: enable_pass
+      prompt: "Enter 'enable' Password"
+      private: yes
+      unsafe: yes
   tasks:
     - name: Configure name Server
       ios_config:
