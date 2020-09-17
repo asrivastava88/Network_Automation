@@ -1,4 +1,4 @@
-# Define Ansible Connection Settings
+# Define Ansible Connection Settings & disregard Host key checking
 ansible_connection: network_cli
 # Define type of the OS remote device is running with
 ansible_network_os: ios
