@@ -34,5 +34,5 @@
 
     - name: Copying output to a json file
       copy:
-        content: "Hosts: {{inventory_hostname}}, Config Status: {{output.changed}}, Errors: {{output.failed}}, Backup Path: {{output.backup_path}>
+        content: "Hosts: {{inventory_hostname}}, Config Status: {{output.changed}}, Errors: {{output.failed}}, Backup Path: {{output.backup_path}}"
         dest: "/root/automation/network/json/{{inventory_hostname}}.json"
